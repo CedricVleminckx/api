@@ -31,7 +31,7 @@ class PictureInvitation extends Mailable
         $data = $this->data;
 
         return $this->from('noreply@prisma.care')
-            ->subject('Help mij dit verhaal aan te vullen')
+            ->subject($data['subject'])
             ->with($data)
             ->markdown('emails.invite-picture');
     }

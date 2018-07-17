@@ -9,7 +9,10 @@
    }
 </style>
 <body>
-   <p>{{ $inviter }}</p>
+<p>Hey {{ $inviter }}</p>
+<p>
+   {{ $content }}
+</p>
 <p><a href="https://airtable.com/shruQ5vgv21gDPsGf">Voeg een verhaal toe!</a></p>
 <p><a href="http://146.185.134.55/residents/NaamFamilielid/stories">Bekijk jouw verhalen</a></p>
 
