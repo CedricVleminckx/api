@@ -46,7 +46,6 @@ class SetPasswordController extends Controller
     public function checkToken(string $token)
     {
         $invite = Invite::where('token', $token)->first();
-
         if (! $invite) {
             abort(404, 'Token already used or invalid');
         }
@@ -89,7 +88,7 @@ class SetPasswordController extends Controller
             'password' => $new_password,
         ];
 
-        Mail::to($user)->send(new SendPassword($data));
+        //Mail::to($user)->send(new SendPassword($data));
 
         return view('invites.confirmation');
     }

@@ -72,4 +72,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('roht', [
         'uses' => 'Syncing\SyncController@timeMachine',
     ]);
+
+    Route::post('sendTextInvitation', 'SendMailController@TextInvitation');
+    Route::post('sendPictureInvitation', 'SendMailController@PictureInvitation');
+    Route::post('sendYouTubeInvitation', 'SendMailController@YoutubeInvitation');
 });
