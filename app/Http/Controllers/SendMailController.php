@@ -16,7 +16,7 @@ use Hash;
 
 class SendMailController extends Controller
 {
-    public function TextInvitation(Request $request){
+    private function CheckUser($request){
         $email = $request->input('email');
 
         $user_data = [
@@ -28,11 +28,11 @@ class SendMailController extends Controller
         $patientId = $request->input('patientId');
         $inviterId = $request->input('inviterId');
 
-        $user = User::where('email', '=', $email)->count();
+        $this->user = User::where('email', '=', $email)->count();
         // TO DO: differentiate between new and existing users
-        if ($user > 0) {
+        if ($this->user > 0) {
             // user exists
-            $user = User::firstOrCreate(['email' => $email], $user_data);
+            $this->user = User::firstOrCreate(['email' => $email], $user_data);
             $inviter = User::find($inviterId)->first_name;
 
             $data = [
@@ -40,22 +40,21 @@ class SendMailController extends Controller
                 'token' => 'NoToken'
             ];
 
-            Mail::to($user)->send(new TextInvitation($data));
+            return $data;
         } else {
             // Create new user
-            $user = User::firstOrCreate(['email' => $email], $user_data);
-
+            $this->user = User::firstOrCreate(['email' => $email], $user_data);
             $inviter = User::find($inviterId)->first_name;
 
             $patient = Patient::findOrFail($patientId);
-            $patient->users()->attach($user->id);
+            $patient->users()->attach($this->user->id);
             $patient_name = $patient->full_name;
 
             $token = str_random(40);
 
             $invite = [
-                'email' => $user->email,
-                'user_id' => $user->id,
+                'email' => $this->user->email,
+                'user_id' => $this->user->id,
                 'token' => $token,
                 'patient_id' => $patientId,
                 'inviter_id' => $inviterId,
@@ -69,13 +68,14 @@ class SendMailController extends Controller
                 'token' => $token
             ];
 
-            Mail::to($user)->send(new TextInvitation($data));
+            return $data;
         }
+        return null;
+    }
 
-
-
-        //Mail::to($user)->send(new TextInvitation($data));
-
+    public function TextInvitation(Request $request){
+        $data = $this->CheckUser($request);
+        Mail::to($this->user)->send(new TextInvitation($data));
         return response()->success([], 204, 'Invitation email sent');
     }
 
