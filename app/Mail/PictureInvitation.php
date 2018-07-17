@@ -16,9 +16,9 @@ class PictureInvitation extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,7 +28,11 @@ class PictureInvitation extends Mailable
      */
     public function build()
     {
+        $data = $this->data;
+
         return $this->from('noreply@prisma.care')
-              ->markdown('emails.invite-picture');
+            ->subject('Help mij dit verhaal aan te vullen')
+            ->with($data)
+            ->markdown('emails.invite-picture');
     }
 }
