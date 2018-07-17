@@ -81,17 +81,15 @@ class SendMailController extends Controller
 
 
     public function PictureInvitation(Request $request){
-        $data = $request->all();
-
-        Mail::to($user)->send(new PictureInvitation($data));
+        $data = $this->CheckUser($request);
+        Mail::to($this->user)->send(new PictureInvitation($data));
 
         return response()->success([], 204, 'Invitation email sent');
     }
 
     public function YoutubeInvitation(Request $request){
-        $data = $request->all();
-
-        Mail::to($user)->send(new YoutubeInvitation($data));
+        $data = $this->CheckUser($request);
+        Mail::to($this->user)->send(new YoutubeInvitation($data));
 
         return response()->success([], 204, 'Invitation email sent');
     }
