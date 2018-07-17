@@ -9,7 +9,7 @@
    }
 </style>
 <body>
-<h3>Hey {{ $inviter }}</h3>
+<p>Hey {{ $inviter }}</p>
 <p>
    Ik wil van oma al haar mooie herinneringen en verhalen vastleggen, zodat we haar leven mooi kunnen documenteren.
    <br>Om dit te doen is er een applicatie genaamd Prisma.
