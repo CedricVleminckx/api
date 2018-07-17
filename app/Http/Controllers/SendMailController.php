@@ -28,40 +28,53 @@ class SendMailController extends Controller
         $patientId = $request->input('patientId');
         $inviterId = $request->input('inviterId');
 
-        $user = User::firstOrCreate(['email' => $email], $user_data);
-
+        $user = User::where('email', '=', $email)->count();
         // TO DO: differentiate between new and existing users
-        if ($user->wasRecentlyCreated === true) {
-            // we'll send an introductory invite
+        if ($user > 0) {
+            // user exists
+            $user = User::firstOrCreate(['email' => $email], $user_data);
+            $inviter = User::find($inviterId)->first_name;
+
+            $data = [
+                'inviter' => $inviter,
+                'token' => 'NoToken'
+            ];
+
+            Mail::to($user)->send(new TextInvitation($data));
         } else {
-            // we'll send a new patient connection notification
+            // Create new user
+            $user = User::firstOrCreate(['email' => $email], $user_data);
+
+            $inviter = User::find($inviterId)->first_name;
+
+            $patient = Patient::findOrFail($patientId);
+            $patient->users()->attach($user->id);
+            $patient_name = $patient->full_name;
+
+            $token = str_random(40);
+
+            $invite = [
+                'email' => $user->email,
+                'user_id' => $user->id,
+                'token' => $token,
+                'patient_id' => $patientId,
+                'inviter_id' => $inviterId,
+            ];
+
+            Invite::create($invite);
+
+            $data = [
+                'patient' => $patient_name,
+                'inviter' => $inviter,
+                'token' => $token
+            ];
+
+            Mail::to($user)->send(new TextInvitation($data));
         }
 
-        $inviter = User::find($inviterId)->first_name;
 
-        $patient = Patient::findOrFail($patientId);
-        $patient->users()->attach($user->id);
-        $patient_name = $patient->full_name;
 
-        $token = str_random(40);
-
-        $invite = [
-            'email' => $user->email,
-            'user_id' => $user->id,
-            'token' => $token,
-            'patient_id' => $patientId,
-            'inviter_id' => $inviterId,
-        ];
-
-        Invite::create($invite);
-
-        $data = [
-            'patient' => $patient_name,
-            'inviter' => $inviter,
-            'token' => $token
-        ];
-
-        Mail::to($user)->send(new TextInvitation($data));
+        //Mail::to($user)->send(new TextInvitation($data));
 
         return response()->success([], 204, 'Invitation email sent');
     }
@@ -70,7 +83,7 @@ class SendMailController extends Controller
     public function PictureInvitation(Request $request){
         $data = $request->all();
 
-        Mail::to("vleminckx.cedric@hotmail.com")->send(new PictureInvitation($data));
+        Mail::to($user)->send(new PictureInvitation($data));
 
         return response()->success([], 204, 'Invitation email sent');
     }
@@ -78,7 +91,7 @@ class SendMailController extends Controller
     public function YoutubeInvitation(Request $request){
         $data = $request->all();
 
-        Mail::to("vleminckx.cedric@hotmail.com")->send(new YoutubeInvitation($data));
+        Mail::to($user)->send(new YoutubeInvitation($data));
 
         return response()->success([], 204, 'Invitation email sent');
     }

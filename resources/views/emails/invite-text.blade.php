@@ -20,8 +20,10 @@
 <p><a href="https://airtable.com/shrJiFcGZhAgDQLPL">Voeg een verhaal toe!</a></p>
 <p><a href="http://146.185.134.55/residents/NaamFamilielid/stories">Bekijk jouw verhalen</a></p>
 
-<p><a href="{{ route('password.set',['token'=>$token]) }}" target="_blank">Bevestig je e-mail adres via deze
+@if ($token != 'NoToken')
+    <p><a href="{{ route('password.set',['token'=>$token]) }}" target="_blank">Bevestig je e-mail adres via deze
         link</a> en kies daarna een wachtwoord.</p>
+@endif
 
 <p></p>
 
