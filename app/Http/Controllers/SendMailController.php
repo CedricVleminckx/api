@@ -29,11 +29,19 @@ class SendMailController extends Controller
         $inviterId = $request->input('inviterId');
 
         $this->user = User::where('email', '=', $email)->count();
-        // TO DO: differentiate between new and existing users
+
+        // Differentiate between new and existing users
         if ($this->user > 0) {
             // user exists
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
-            $inviter = User::find($inviterId)->first_name;
+            //Person who sends email
+            //$inviter = User::find($inviterId)->first_name;
+
+            //person who is invited
+            $inviter = $request->input('firstName');
+
+            //Getting content
+            //$content = $request->input('content');
 
             $data = [
                 'inviter' => $inviter,
@@ -44,7 +52,11 @@ class SendMailController extends Controller
         } else {
             // Create new user
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
-            $inviter = User::find($inviterId)->first_name;
+            //Person who sends email
+            //$inviter = User::find($inviterId)->first_name;
+
+            //person who is invited
+            $inviter = $request->input('firstName');
 
             $patient = Patient::findOrFail($patientId);
             $patient->users()->attach($this->user->id);

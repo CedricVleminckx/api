@@ -9,14 +9,7 @@
    }
 </style>
 <body>
-   <p>Hey {{ $inviter }}</p>
-   <p>
-      Ik wil van oma al haar mooie herinneringen en verhalen vastleggen, zodat we haar leven mooi kunnen documenteren.
-      <br>Om dit te doen is er een applicatie genaamd Prisma.
-      <br>Heb je deze week ergens een halfuurtje om een verhaal met een YouTube video toe te voegen?
-      <br>Hieronder vind je een link naar een formulier waar je het verhaal kan toevoegen en de andere om het verhaal te bekijken op haar profiel.
-   <br>Groetjes Cedric
-</p>
+   <p>{{ $inviter }}</p>
 <p><a href="https://airtable.com/shruQ5vgv21gDPsGf">Voeg een verhaal toe!</a></p>
 <p><a href="http://146.185.134.55/residents/NaamFamilielid/stories">Bekijk jouw verhalen</a></p>
 
