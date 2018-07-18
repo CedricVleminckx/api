@@ -34,8 +34,8 @@ class SendMailController extends Controller
         if ($this->user > 0) {
             // user exists
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
-            //Person who sends email
-            //$inviter = User::find($inviterId)->first_name;
+            //email of person who sends email
+            $inviterEmail = User::find($inviterId)->email;
 
             //person who is invited
             $inviter = $request->input('firstName');
@@ -46,6 +46,7 @@ class SendMailController extends Controller
 
             $data = [
                 'inviter' => $inviter,
+                'inviterEMail' => $inviterEmail,
                 'token' => 'NoToken',
                 'content' => $content,
                 'subject' => $subject
@@ -55,9 +56,9 @@ class SendMailController extends Controller
         } else {
             // Create new user
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
-            //Person who sends email
-            //$inviter = User::find($inviterId)->first_name;
 
+            //email of person who sends email
+            $inviterEmail = User::find($inviterId)->email;
             //person who is invited
             $inviter = $request->input('firstName');
             //Getting content and subject
@@ -82,6 +83,7 @@ class SendMailController extends Controller
 
             $data = [
                 'inviter' => $inviter,
+                'inviterEMail' => $inviterEmail,
                 'token' => $token,
                 'content' => $content,
                 'subject' => $subject

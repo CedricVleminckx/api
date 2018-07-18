@@ -30,7 +30,7 @@ class TextInvitation extends Mailable
     {
         $data = $this->data;
 
-        return $this->from('noreply@prisma.care')
+        return $this->from($data['inviterEMail'])
             ->subject($data['subject'])
             ->with($data)
             ->markdown('emails.invite-text');
