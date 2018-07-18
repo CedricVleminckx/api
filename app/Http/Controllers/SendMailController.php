@@ -100,7 +100,6 @@ class SendMailController extends Controller
         return response()->success([], 204, 'Invitation email sent');
     }
 
-
     public function PictureInvitation(Request $request){
         $data = $this->CheckUser($request);
         Mail::to($this->user)->send(new PictureInvitation($data));

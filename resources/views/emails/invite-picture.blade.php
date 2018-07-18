@@ -24,6 +24,7 @@
 <p></p>
 
 <div>
+    <h1></h1>
    <h2>Hoe scan ik foto's?</h2>
    <p>Foto&rsquo;s scannen kan ook gemakkelijk zijn. Met een smartphone, tablet of computer digitaliseer je je fotoalbums in 1&ndash;2&ndash;3.
       <br>
