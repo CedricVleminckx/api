@@ -21,8 +21,8 @@ class SendMailController extends Controller
 
         $user_data = [
             'password' => Hash::make(str_random(40)),
-            'first_name' => $request->input('firstName'),
-            'last_name' => $request->input('lastName'),
+            'first_name' => $request->input('firstname'),
+            'last_name' => $request->input('lastname'),
         ];
 
         $patientId = $request->input('patientId');
@@ -38,11 +38,11 @@ class SendMailController extends Controller
             $inviterEmail = User::find($inviterId)->email;
 
             //person who is invited
-            $inviter = $request->input('firstName');
+            $inviter = $request->input('firstname');
 
             //Getting content and subject
-            $content = $request->input('content');
-            $subject = $request->input('subject');
+            $content = $request->input('onderwerp');
+            $subject = $request->input('message');
 
             $data = [
                 'inviter' => $inviter,
@@ -60,10 +60,10 @@ class SendMailController extends Controller
             //email of person who sends email
             $inviterEmail = User::find($inviterId)->email;
             //person who is invited
-            $inviter = $request->input('firstName');
+            $inviter = $request->input('firstname');
             //Getting content and subject
-            $content = $request->input('content');
-            $subject = $request->input('subject');
+            $content = $request->input('message');
+            $subject = $request->input('onderwerp');
 
             $patient = Patient::findOrFail($patientId);
             $patient->users()->attach($this->user->id);
