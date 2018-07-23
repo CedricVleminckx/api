@@ -25,6 +25,7 @@ class SendMailController extends Controller
             'last_name' => $request->input('lastname'),
         ];
 
+        //TODO: Get patientId and inviterId from frontend
         $patientId = $request->input('patientId');
         $inviterId = $request->input('inviterId');
 
