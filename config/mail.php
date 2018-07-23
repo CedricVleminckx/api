@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@prisma.care'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@api2.prisma.care'),
         'name' => env('MAIL_FROM_NAME', 'Prisma'),
     ],
 
