@@ -13,7 +13,7 @@
 <p>
    {{ $content }}
 </p>
-<p><a href="http://146.185.134.55/residents/NaamFamilielid/stories">Bekijk jouw verhalen</a></p>
+<p><a href="https://app.prisma.care/login">Bekijk jouw verhalen</a></p>
 
 @if ($token != 'NoToken')
     <p><a href="{{ route('password.set',['token'=>$token]) }}" target="_blank">Bevestig je e-mail adres via deze
