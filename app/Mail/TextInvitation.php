@@ -29,6 +29,7 @@ class TextInvitation extends Mailable
     public function build()
     {
         $data = $this->data;
+        dd($data);
         return $this->from('uitnodiging@api2.prisma.care')
             ->subject($data['subject'])
             ->with($data)
