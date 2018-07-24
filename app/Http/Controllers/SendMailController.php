@@ -48,7 +48,7 @@ class SendMailController extends Controller
             $data = [
                 'inviter' => $inviter,
                 'inviterEMail' => $inviterEmail,
-                'sender' =>  $user_data->first_name,
+                'sender' =>  $user_data['first_name'],
                 'token' => 'NoToken',
                 'content' => $content,
                 'subject' => $subject
@@ -86,7 +86,7 @@ class SendMailController extends Controller
             $data = [
                 'inviter' => $inviter,
                 'inviterEMail' => $inviterEmail,
-                'sender' => $user_data->first_name,
+                'sender' => $user_data['first_name'],
                 'token' => $token,
                 'content' => $content,
                 'subject' => $subject
