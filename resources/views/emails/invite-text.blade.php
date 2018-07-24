@@ -13,7 +13,7 @@
 <p>
    {{ $content }}
 </p>
-<p><a href="">Antwoorden op deze mail</a></p>
+<p>Stuur een mail naar {{ $sender }}</p>
 <p><a href="http://146.185.134.55/residents/NaamFamilielid/stories">Bekijk jouw verhalen</a></p>
 
 @if ($token != 'NoToken')
