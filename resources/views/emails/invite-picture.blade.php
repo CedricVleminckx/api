@@ -13,7 +13,6 @@
 <p>
    {{ $content }}
 </p>
-<p><a href="https://airtable.com/shriNrmXfpIq5zf93">Voeg een verhaal toe!</a></p>
 <p><a href="http://146.185.134.55/residents/NaamFamilielid/stories">Bekijk jouw verhalen</a></p>
 
 @if ($token != 'NoToken')
