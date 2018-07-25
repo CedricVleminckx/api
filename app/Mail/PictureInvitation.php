@@ -30,7 +30,7 @@ class PictureInvitation extends Mailable
     {
         $data = $this->data;
 
-        return $this->from('uitnodiging@api2.prisma.care')
+        return $this->from($data['inviter']'@api2.prisma.care')
             ->subject($data['subject'])
             ->with($data)
             ->markdown('emails.invite-picture');
