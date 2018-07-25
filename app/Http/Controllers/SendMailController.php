@@ -25,7 +25,7 @@ class SendMailController extends Controller
             'last_name' => $request->input('lastName'),
         ];
 
-        //TODO: Get patientId and invitedId from frontend
+        //TODO: Get patientId from frontend
         $patientId = $request->input('patientId');
 
         $this->user = User::where('email', '=', $email)->count();
@@ -72,7 +72,8 @@ class SendMailController extends Controller
                 'email' => $this->user->email,
                 'user_id' => $this->user->id,
                 'token' => $token,
-                'patient_id' => $patientId,
+                'patient_id' => $patientId
+                'invited_id' => $this->user->id;
             ];
 
             Invite::create($invite);
