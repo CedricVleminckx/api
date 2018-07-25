@@ -43,6 +43,7 @@ class SendMailController extends Controller
             $message = $request->input('message');
 
             $inviterId = Auth::id();
+            dd($inviterId);
             $inviter = User::findOrFail($inviterId)->first_name;
 
             $data = [
