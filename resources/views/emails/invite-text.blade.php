@@ -9,7 +9,7 @@
    }
 </style>
 <body>
-<p>Hey {{ $inviterd }}</p>
+<p>Hey {{ $invited }}</p>
 <p>
    {{ $message }}
 </p>
