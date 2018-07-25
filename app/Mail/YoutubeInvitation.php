@@ -30,7 +30,7 @@ class YoutubeInvitation extends Mailable
     {
         $data = $this->data;
 
-        return $this->from('uitnodiging@api2.prisma.care')
+        return $this->from($data['inviter'])
             ->subject($data['subject'])
             ->with($data)
             ->markdown('emails.invite-youtube');
