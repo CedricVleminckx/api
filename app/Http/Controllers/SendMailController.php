@@ -72,8 +72,8 @@ class SendMailController extends Controller
                 'email' => $this->user->email,
                 'user_id' => $this->user->id,
                 'token' => $token,
-                'patient_id' => $patientId
-                'invited_id' => $this->user->id;
+                'patient_id' => $patientId,
+                'invited_id' => $this->user->id
             ];
 
             Invite::create($invite);
