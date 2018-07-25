@@ -43,11 +43,11 @@ class SendMailController extends Controller
             $message = $request->input('message');
 
 
-            $inviterId = Auth::id();
-            $inviter = User::findOrFail($inviterId)->first_name;
+            /*$inviterId = Auth::id();
+            $inviter = User::findOrFail($inviterId)->first_name;*/
 
             $data = [
-                'invited' => $invited,
+                'invited' => 'cedricvleminckx',
                 'inviter' => $inviter,
                 'token' => 'NoToken',
                 'subject' => $subject,
