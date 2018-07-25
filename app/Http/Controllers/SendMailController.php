@@ -10,7 +10,6 @@ use App\Mail\YoutubeInvitation;
 use App\User;
 use App\Patient;
 use App\Invite;
-use JWTAuth;
 
 use Mail;
 use Hash;
