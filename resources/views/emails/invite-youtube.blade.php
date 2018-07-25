@@ -9,9 +9,9 @@
    }
 </style>
 <body>
-<p>Hey {{ $inviter }}</p>
+<p>Hey {{ $invited }}</p>
 <p>
-   {{ $content }}
+   {{ $message }}
 </p>
 <p><a href="https://app.prisma.care/login">Bekijk jouw verhalen</a></p>
 
