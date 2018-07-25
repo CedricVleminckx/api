@@ -43,12 +43,12 @@ class SendMailController extends Controller
             $message = $request->input('message');
 
 
-            /*$inviterId = Auth::id();
-            $inviter = User::findOrFail($inviterId)->first_name;*/
+            $inviterId = Auth::user()->id;
+            $inviter = User::findOrFail($inviterId)->first_name;
 
             $data = [
                 'invited' => $invited,
-                'inviter' => 'prisma.care@api2.prisma.care',
+                'inviter' => $inviter . '@api2.prisma.care',
                 'token' => 'NoToken',
                 'subject' => $subject,
                 'message' => $message
