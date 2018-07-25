@@ -43,7 +43,9 @@ class SendMailController extends Controller
             $message = $request->input('message');
 
 
-            $inviterId = Auth::user()->id;
+            /*$inviterId = Auth::user()->id;
+            $inviter = User::findOrFail($inviterId)->first_name;*/
+            $inviterId = JWTAuth::parseToken()->authenticate();
             $inviter = User::findOrFail($inviterId)->first_name;
 
             $data = [
