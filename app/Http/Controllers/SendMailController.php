@@ -25,7 +25,7 @@ class SendMailController extends Controller
             'last_name' => $request->input('lastName'),
         ];
 
-        //TODO: Get patientId from frontend
+        //TODO: Get auth user and then patientId
         $patientId = $request->input('patientId');
 
         $this->user = User::where('email', '=', $email)->count();
