@@ -27,7 +27,6 @@ class SendMailController extends Controller
 
         //TODO: Get patientId and invitedId from frontend
         $patientId = $request->input('patientId');
-        $invitedId = $request->input('invitedId');
 
         $this->user = User::where('email', '=', $email)->count();
 
@@ -35,8 +34,6 @@ class SendMailController extends Controller
         if ($this->user > 0) {
             // user exists
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
-            //email of person who sends email
-            $invitedEmail = User::find($invitedId)->email;
 
             //person who is invited
             $invited = $request->input('firstName');
@@ -49,7 +46,6 @@ class SendMailController extends Controller
 
             $data = [
                 'invited' => $invited,
-                'invitedEMail' => $invitedEmail,
                 'inviter' => $inviter,
                 'token' => 'NoToken',
                 'subject' => $subject,
@@ -61,9 +57,6 @@ class SendMailController extends Controller
             // Create new user
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
 
-            //email of person who sends email
-            $invitedEmail = User::find($invitedId)->email;
-            //person who is invited
             $invited = $request->input('firstName');
             //Getting content and message
             $subject = $request->input('subject');
@@ -80,7 +73,6 @@ class SendMailController extends Controller
                 'user_id' => $this->user->id,
                 'token' => $token,
                 'patient_id' => $patientId,
-                'invited_id' => $invitedId,
             ];
 
             Invite::create($invite);
@@ -89,7 +81,6 @@ class SendMailController extends Controller
 
             $data = [
                 'invited' => $invited,
-                'invitedEMail' => $invitedEmail,
                 'inviter' => $inviter,
                 'token' => 'NoToken',
                 'subject' => $subject,
