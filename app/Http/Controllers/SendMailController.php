@@ -42,13 +42,15 @@ class SendMailController extends Controller
             $subject = $request->input('subject');
             $message = $request->input('message');
 
+            /*
             $inviterId = Auth::id();
             dd($inviterId);
             $inviter = User::findOrFail($inviterId)->first_name;
+            */
 
             $data = [
                 'invited' => $invited,
-                'inviter' => $inviter,
+                //'inviter' => $inviter,
                 'token' => 'NoToken',
                 'subject' => $subject,
                 'message' => $message
@@ -80,12 +82,14 @@ class SendMailController extends Controller
 
             Invite::create($invite);
 
+            /*
             $inviterId = Auth::id();
             $inviter = User::findOrFail($inviterId)->first_name;
+            */
 
             $data = [
                 'invited' => $invited,
-                'inviter' => $inviter,
+                //'inviter' => $inviter,
                 'token' => 'NoToken',
                 'subject' => $subject,
                 'message' => $message
