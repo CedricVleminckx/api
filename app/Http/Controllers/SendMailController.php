@@ -43,12 +43,9 @@ class SendMailController extends Controller
             $subject = $request->input('subject');
             $message = $request->input('message');
 
-
-            $inviter = JWTAuth::parseToken(JWTAuth::setToken('azerty'))->toUser();
-
             $data = [
                 'invited' => $invited,
-                'inviter' => $inviter . '@api2.prisma.care',
+                'inviter' => 'prismacare@api2.prisma.care',
                 'token' => 'NoToken',
                 'subject' => $subject,
                 'message' => $message
