@@ -48,7 +48,7 @@ class SendMailController extends Controller
 
             $data = [
                 'invited' => $invited,
-                'inviter' => 'cedricVleminckx',
+                'inviter' => 'cedricVleminckx@api2.prisma.care',
                 'token' => 'NoToken',
                 'subject' => $subject,
                 'message' => $message
