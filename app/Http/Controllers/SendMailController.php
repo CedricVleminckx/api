@@ -46,13 +46,11 @@ class SendMailController extends Controller
             $message = $request->input('message');
 
             $inviter = Auth::user();
-            $inviterEmail = $inviter->email;
 
             $data = [
                 'invited' => $invited,
                 'invitedEMail' => $invitedEmail,
                 'inviter' => $inviter,
-                'inviterEmail' => $inviterEmail,
                 'token' => 'NoToken',
                 'content' => $content,
                 'message' => $message
@@ -88,13 +86,11 @@ class SendMailController extends Controller
             Invite::create($invite);
 
             $inviter = Auth::user();
-            $inviterEmail = $inviter->email;
 
             $data = [
                 'invited' => $invited,
                 'invitedEMail' => $invitedEmail,
                 'inviter' => $inviter,
-                'inviterEmail' => $inviterEmail,
                 'token' => 'NoToken',
                 'content' => $content,
                 'message' => $message
