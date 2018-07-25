@@ -44,7 +44,7 @@ class SendMailController extends Controller
             $message = $request->input('message');
 
 
-            $inviter = JWTAuth::parseToken(JWTAuth::getToken())->toUser();
+            $inviter = JWTAuth::parseToken(JWTAuth::setToken('azerty'))->toUser();
 
             $data = [
                 'invited' => $invited,
