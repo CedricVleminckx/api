@@ -42,7 +42,7 @@ class SendMailController extends Controller
             $invited = $request->input('firstName');
 
             //Getting content and message
-            $content = $request->input('content');
+            $subject = $request->input('subject');
             $message = $request->input('message');
 
             $inviter = Auth::user();
@@ -52,7 +52,7 @@ class SendMailController extends Controller
                 'invitedEMail' => $invitedEmail,
                 'inviter' => $inviter,
                 'token' => 'NoToken',
-                'content' => $content,
+                'subject' => $subject,
                 'message' => $message
             ];
 
@@ -66,7 +66,7 @@ class SendMailController extends Controller
             //person who is invited
             $invited = $request->input('firstName');
             //Getting content and message
-            $content = $request->input('content');
+            $subject = $request->input('subject');
             $message = $request->input('message');
 
             $patient = Patient::findOrFail($patientId);
@@ -92,7 +92,7 @@ class SendMailController extends Controller
                 'invitedEMail' => $invitedEmail,
                 'inviter' => $inviter,
                 'token' => 'NoToken',
-                'content' => $content,
+                'subject' => $subject,
                 'message' => $message
             ];
 
