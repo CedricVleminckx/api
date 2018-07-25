@@ -42,7 +42,8 @@ class SendMailController extends Controller
             $subject = $request->input('subject');
             $message = $request->input('message');
 
-            $inviter = Auth::user();
+            $inviterId = Auth::id();
+            $inviter = User::findOrFail($inviterId);
 
             $data = [
                 'invited' => $invited,
@@ -78,7 +79,8 @@ class SendMailController extends Controller
 
             Invite::create($invite);
 
-            $inviter = Auth::user();
+            $inviterId = Auth::id();
+            $inviter = User::findOrFail($inviterId);
 
             $data = [
                 'invited' => $invited,
