@@ -90,7 +90,7 @@ class SendMailController extends Controller
             $data = [
                 'invited' => $invited,
                 //'inviter' => $inviter,
-                'token' => 'NoToken',
+                'token' => $token,
                 'subject' => $subject,
                 'message' => $message
             ];
