@@ -10,6 +10,7 @@ use App\Mail\YoutubeInvitation;
 use App\User;
 use App\Patient;
 use App\Invite;
+use JWTAuth;
 
 use Mail;
 use Hash;
@@ -43,7 +44,7 @@ class SendMailController extends Controller
             $message = $request->input('message');
 
 
-            $inviter = User::findOrFail(Auth::user());
+            $inviter = JWTAuth::parseToken()->toUser();
 
             $data = [
                 'invited' => $invited,
