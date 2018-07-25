@@ -47,8 +47,8 @@ class SendMailController extends Controller
             $inviter = User::findOrFail($inviterId)->first_name;*/
 
             $data = [
-                'invited' => 'cedricvleminckx',
-                'inviter' => $inviter,
+                'invited' => $invited,
+                'inviter' => 'cedricVleminckx',
                 'token' => 'NoToken',
                 'subject' => $subject,
                 'message' => $message
