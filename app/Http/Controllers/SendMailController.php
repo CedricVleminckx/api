@@ -25,9 +25,9 @@ class SendMailController extends Controller
             'last_name' => $request->input('lastName'),
         ];
 
-        //TODO: Get patientId and inviterId from frontend
+        //TODO: Get patientId and invitedId from frontend
         $patientId = $request->input('patientId');
-        $inviterId = $request->input('inviterId');
+        $invitedId = $request->input('invitedId');
 
         $this->user = User::where('email', '=', $email)->count();
 
@@ -36,21 +36,26 @@ class SendMailController extends Controller
             // user exists
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
             //email of person who sends email
-            $inviterEmail = User::find($inviterId)->email;
+            $invitedEmail = User::find($invitedId)->email;
 
             //person who is invited
-            $inviter = $request->input('firstName');
+            $invited = $request->input('firstName');
 
-            //Getting content and subject
+            //Getting content and message
             $content = $request->input('content');
-            $subject = $request->input('subject');
+            $message = $request->input('message');
+
+            $inviter = Auth::user();
+            $inviterEmail = Auth::user()->email;
 
             $data = [
+                'invited' => $invited,
+                'invitedEMail' => $invitedEmail,
                 'inviter' => $inviter,
-                'inviterEMail' => $inviterEmail,
+                'inviterEmail' => $inviterEmail,
                 'token' => 'NoToken',
                 'content' => $content,
-                'subject' => $subject
+                'message' => $message
             ];
 
             return $data;
@@ -59,12 +64,12 @@ class SendMailController extends Controller
             $this->user = User::firstOrCreate(['email' => $email], $user_data);
 
             //email of person who sends email
-            $inviterEmail = User::find($inviterId)->email;
+            $invitedEmail = User::find($invitedId)->email;
             //person who is invited
-            $inviter = $request->input('firstName');
-            //Getting content and subject
+            $invited = $request->input('firstName');
+            //Getting content and message
             $content = $request->input('content');
-            $subject = $request->input('subject');
+            $message = $request->input('message');
 
             $patient = Patient::findOrFail($patientId);
             $patient->users()->attach($this->user->id);
@@ -77,17 +82,17 @@ class SendMailController extends Controller
                 'user_id' => $this->user->id,
                 'token' => $token,
                 'patient_id' => $patientId,
-                'inviter_id' => $inviterId,
+                'invited_id' => $invitedId,
             ];
 
             Invite::create($invite);
 
             $data = [
-                'inviter' => $inviter,
-                'inviterEMail' => $inviterEmail,
+                'invited' => $invited,
+                'invitedEMail' => $invitedEmail,
                 'token' => $token,
                 'content' => $content,
-                'subject' => $subject
+                'message' => $message
             ];
 
             return $data;
