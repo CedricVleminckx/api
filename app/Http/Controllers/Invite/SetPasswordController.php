@@ -90,7 +90,7 @@ class SetPasswordController extends Controller
 
         //Mail::to($user)->send(new SendPassword($data));
 
-        return view('invites.confirmation');
+        return redirect('https://app.prisma.care/residents');
     }
 
     /**
